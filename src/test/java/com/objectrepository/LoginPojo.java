@@ -6,51 +6,45 @@ import org.openqa.selenium.support.PageFactory;
 import com.baseclass.BaseClass;
 
 public class LoginPojo extends BaseClass {
-
+	
 	// 1.Constructor with page factory
 	public LoginPojo() {
 		PageFactory.initElements(driver, this);
 	}
 
 	// 2.Using annotations we will find the webElements
-	@FindBy(xpath = "(//li[@class='authorization-link'])[1]")
-	private WebElement SignIn;
-	@FindBy(xpath = "(//input[@id='email'])[1]")
-	private WebElement EmailId;
-	@FindBy(xpath = "(//input[@id='pass'])[1]")
-	private WebElement PassWord;
-	@FindBy(xpath = "(//span[text()='Sign In'])[2]")
-	private WebElement clkBtn;
-	@FindBy(xpath="(//button[@type='button'])[1]")
-	private WebElement Hidebutton;
-	@FindBy(xpath = "(//li[@class='authorization-link'])[1]")
-	private WebElement SignOut;
-	
+	@FindBy(xpath = "//input[@id='email']")
+	private WebElement txtEmail;
+	@FindBy(xpath = "//input[@id='pass']")
+	private WebElement txtPass;
+	@FindBy(xpath = "//button[@name='login']")
+	private WebElement LgnBtn;
+	@FindBy(xpath="(//div[@data-visualcompletion='ignore'])[9]")
+	private WebElement picClick;
+	@FindBy(xpath = "//span[text()='Log Out']")
+	private WebElement LgotBtn;
 
 	// 3.To Generate Getters and Setters
-	public WebElement getSignIn() {
-		return SignIn;
+	public WebElement getTxtEmail() {
+		return txtEmail;
 	}
 
-	public WebElement getEmailId() {
-		return EmailId;
+	public WebElement getTxtPass() {
+		return txtPass;
 	}
 
-	public WebElement getPassWord() {
-		return PassWord;
+	public WebElement getLgnBtn() {
+		return LgnBtn;
 	}
 
-	public WebElement getClkBtn() {
-		return clkBtn;
+	public WebElement getPicClick() {
+		return picClick;
 	}
 
-	public WebElement getSignOut() {
-		return SignOut;
+	public WebElement getLgotBtn() {
+		return LgotBtn;
 	}
-	
-	public WebElement getHidebutton() {
-		return Hidebutton;
-	}
+
 	
 
 	

@@ -13,63 +13,66 @@ import io.cucumber.java.en.When;
 public class LoginStepDefinition extends LoginPojo {
 	public static LoginPojo l;
 
-	@Given("User is in Hazelton login page")
-	public void user_is_in_Hazelton_login_page() throws InterruptedException, IOException {
+	@Given("User is in Facebook login page")
+	public void user_is_in_Facebook_login_page() throws InterruptedException, IOException {
 		launchChrome();
-		loadUrl("https://hazeltonswines.com/");
+		loadUrl("https://www.facebook.com/");
 		maximizeBrowser();
-		screenShot("Hazelton_HomePage");
-		Thread.sleep(500);
+		screenShot("Facebook_HomePage-1");
+		Thread.sleep(1000);
 
 	}
 
 	@When("User enter valid username and valid password")
 	public void user_enter_valid_username_and_valid_password() throws IOException, InterruptedException {
 		l = new LoginPojo();
-		l.getSignIn().click();
-		screenShot("Hazelton_Signin");
+		fill(l.getTxtEmail(), readExcel(11, 0));
+		fill(l.getTxtPass(), readExcel(11, 1));
+		screenShot("Facebook_Enter_UserId_Password-2");
 		Thread.sleep(1000);
-		fill(l.getEmailId(), readExcel(6, 0));
-		fill(l.getPassWord(), readExcel(6, 1));
-		screenShot("Hazelton_Enter_UserId_Password");
 
 	}
 
 	@When("User click Login Button")
 	public void user_click_Login_Button() throws InterruptedException, IOException {
-		btnclik(l.getClkBtn());
-		screenShot("Hazelton_Click_Enter");
+		btnclik(l.getLgnBtn());
 		Thread.sleep(1000);
 	}
 
 	@Then("User should be in valid credentials page")
-	public void user_should_be_in_valid_credentials_page() throws InterruptedException {
+	public void user_should_be_in_valid_credentials_page() throws InterruptedException, IOException {
 		String Url = driver.getCurrentUrl();
-		Assert.assertTrue("Check the Url.....", Url.contains("hazeltonswines"));
-		Thread.sleep(500);
+		Assert.assertTrue("Check the Url.....", Url.contains("facebook"));
+		screenShot("Facebook_Insertpage-3");
+		Thread.sleep(1000);
 	}
 
-	@When("close the Hazelton Application browser")
-	public static void close_the_Hazelton_Application_browser() throws IOException {
-		l.getHidebutton().click();
-		mvetoElmnt(l.getSignOut());
-		singleClick(l.getSignOut());
+	@When("close the Facebook Application browser")
+	public static void close_the_Facebook_Application_browser() throws IOException, InterruptedException {
+		mvetoElmnt(l.getPicClick());
+		singleClick(l.getPicClick());
+		Thread.sleep(1000);
+		mvetoElmnt(l.getLgotBtn());
+		singleClick(l.getLgotBtn());
+		screenShot("Facebook_Signout-4");
 
 	}
 
-	@Given("User is in Facebook login page")
-	public void user_is_in_Facebook_login_page() throws IOException {
+	@Given("User is in facebook login page")
+	public void user_is_in_facebook_login_page() throws IOException, InterruptedException {
 		launchChrome();
 		loadUrl("https://www.facebook.com/");
 		maximizeBrowser();
-		screenShot("Facebook_login");
+		screenShot("Facebook_login-5");
+		Thread.sleep(1000);
 	}
 
 	@When("User click forgot password link")
-	public void user_click_forgot_password_link() throws IOException {
+	public void user_click_forgot_password_link() throws IOException, InterruptedException {
 		WebElement frgtBtn = driver.findElement(By.xpath("//a[text()='Forgotten password?']"));
 		frgtBtn.click();
-		screenShot("Click_FrgtBtn");
+		screenShot("Click_FrgtBtn-6");
+		Thread.sleep(1000);
 	}
 
 	@When("User searches the account using invalid mobile number {string}")
@@ -77,8 +80,8 @@ public class LoginStepDefinition extends LoginPojo {
 			throws InterruptedException, IOException {
 		WebElement txtMobile = driver.findElement(By.xpath("//input[@id='identify_email']"));
 		txtMobile.sendKeys(mobile);
-		screenShot("Enter_Mobile");
-		Thread.sleep(500);
+		screenShot("Enter_Mobile-7");
+		Thread.sleep(1000);
 		WebElement srchBtn = driver.findElement(By.xpath("//button[@id='did_submit']"));
 		srchBtn.click();
 		Thread.sleep(1000);
@@ -89,7 +92,7 @@ public class LoginStepDefinition extends LoginPojo {
 		WebElement errormessage = driver
 				.findElement(By.xpath("//div[contains(text(),'Your search did not return any results.')]"));
 		Assert.assertTrue("The Error Message Will Come.....", errormessage.isDisplayed());
-		screenShot("Final_Click_Btn");
+		screenShot("Final_Click_Btn-8");
 	}
 
 }
